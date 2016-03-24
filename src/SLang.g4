@@ -1,5 +1,13 @@
 grammar SLang;
 
+// code structure
+statements: statements statement
+    |       statement;
+statement:  ID ASSIGN expr
+    |       ID ASSIGN econd;
+
+ASSIGN: '=';
+
 // expressions
 econd
     :   econd '|' tcond

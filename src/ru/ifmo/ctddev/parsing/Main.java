@@ -7,7 +7,7 @@ import ru.ifmo.ctddev.parsing.antlr.SLangLexer;
 import ru.ifmo.ctddev.parsing.antlr.SLangParser;
 
 /**
- * @author Моклев Вячеслав
+ * @author РњРѕРєР»РµРІ Р’СЏС‡РµСЃР»Р°РІ
  */
 public class Main {
     public static void main(String[] args) {

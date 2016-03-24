@@ -4,7 +4,7 @@ import ru.ifmo.ctddev.parsing.antlr.SLangBaseVisitor;
 import ru.ifmo.ctddev.parsing.antlr.SLangParser;
 
 /**
- * @author Моклев Вячеслав
+ * @author РњРѕРєР»РµРІ Р’СЏС‡РµСЃР»Р°РІ
  */
 public class SemanticVisitor extends SLangBaseVisitor<Object> {
     @Override
