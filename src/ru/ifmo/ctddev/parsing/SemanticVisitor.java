@@ -8,6 +8,28 @@ import ru.ifmo.ctddev.parsing.antlr.SLangParser;
  */
 public class SemanticVisitor extends SLangBaseVisitor<Object> {
     @Override
+    public Void visitStatements(SLangParser.StatementsContext ctx) {
+        visitStatement(ctx.statement());
+        if (ctx.statements() != null) {
+            visitStatements(ctx.statements());
+        }
+        return null;
+    }
+
+    @Override
+    public Void visitStatement(SLangParser.StatementContext ctx) {
+        if (ctx.expr() != null) {
+            System.out.println(ctx.ID().getSymbol().getText() + " = " + visitExpr(ctx.expr()) + ";");
+            return null;
+        }
+        if (ctx.econd() != null) {
+            System.out.println(ctx.ID().getSymbol().getText() + " = " + visitEcond(ctx.econd()) + ";");
+            return null;
+        }
+        return null;
+    }
+
+    @Override
     public ExprTree visitEcond(SLangParser.EcondContext ctx) {
         if (ctx.getChildCount() == 1) {
             return visitTcond(ctx.tcond());

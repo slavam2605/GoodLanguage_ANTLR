@@ -11,11 +11,11 @@ import ru.ifmo.ctddev.parsing.antlr.SLangParser;
  */
 public class Main {
     public static void main(String[] args) {
-        ANTLRInputStream is = new ANTLRInputStream("(a + b) * (c - d * e)");
+        ANTLRInputStream is = new ANTLRInputStream("x = (a + b) * (c - d * e)");
         SLangLexer lexer = new SLangLexer(is);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         SLangParser parser = new SLangParser(tokens);
-        ParseTree tree = parser.expr();
-        System.out.println(new SemanticVisitor().visit(tree));
+        ParseTree tree = parser.statements();
+        new SemanticVisitor().visit(tree);
     }
 }

@@ -4,7 +4,13 @@ grammar SLang;
 statements: statements statement
     |       statement;
 statement:  ID ASSIGN expr
-    |       ID ASSIGN econd;
+    |       ID ASSIGN econd
+    |       tuple ASSIGN tuple;
+
+tuple:      econd ',' tuple
+    |       expr ',' tuple
+    |       econd
+    |       expr;
 
 ASSIGN: '=';
 
@@ -31,4 +37,5 @@ factor
 // terminals
 INT:    [0-9]+;
 ID:     [a-zA-Z_]*[a-zA-Z0-9_]+;
-WS:     [ \t\n\r]+ -> skip;
+BR:     [\n] -> skip;
+WS:     [ \t\r]+ -> skip;
