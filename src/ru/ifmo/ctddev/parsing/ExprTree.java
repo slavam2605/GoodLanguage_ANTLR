@@ -1,6 +1,8 @@
 package ru.ifmo.ctddev.parsing;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -13,12 +15,14 @@ public class ExprTree {
 
     public ExprTree(TreeNode node, ExprTree... children) {
         this.node = node;
-        this.children = Arrays.asList(children);
+        this.children = new ArrayList<>();
+        Collections.addAll(this.children, children);
     }
 
     public ExprTree(TreeNode node, Object data, int dummy) {
         this.node = node;
         this.data = data;
+        this.children = new ArrayList<>();
     }
 
     @Override
@@ -34,7 +38,16 @@ public class ExprTree {
             case TIMES:     return children.get(0) + " * " + children.get(1);
             case DIV:       return children.get(0) + " / " + children.get(1);
             case BRACKETS:  return "(" + children.get(0) + ")";
-            case VAR:       return (String) data;
+            case VAR:       return data.toString();
+            case INT:       return data.toString();
+            case TUPLE: {
+                StringBuilder sb = new StringBuilder();
+                sb.append(children.get(0));
+                for (int i = 1; i < children.size(); i++) {
+                    sb.append(", ").append(children.get(i));
+                }
+                return sb.toString();
+            }
             default:        throw new IllegalStateException("Unknown nodeType: " + node);
         }
     }

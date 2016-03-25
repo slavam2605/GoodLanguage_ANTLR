@@ -1,18 +1,16 @@
 grammar SLang;
 
 // code structure
-statements: statements statement
-    |       statement;
-statement:  ID ASSIGN expr
-    |       ID ASSIGN econd
-    |       tuple ASSIGN tuple;
-
-tuple:      econd ',' tuple
-    |       expr ',' tuple
-    |       econd
-    |       expr;
-
-ASSIGN: '=';
+statements: statements statement DELIM
+    |       statement DELIM;
+statement:  tuple ASSIGN tuple
+    |       expr
+    |       tuple ARROW tuple ':' statement ('!' statement)?;
+tuple:      tuple ',' tupleObject
+    |       tupleObject;
+tupleObject:    econd
+    |           expr
+    |           '(' tuple ')';
 
 // expressions
 econd
@@ -32,10 +30,14 @@ term
     |   factor;
 factor
     :   ID
+    |   INT
     |   '(' expr ')';
 
 // terminals
 INT:    [0-9]+;
 ID:     [a-zA-Z_]*[a-zA-Z0-9_]+;
-BR:     [\n] -> skip;
+DELIM:  [;\n]+;
+ASSIGN: '=';
+ARROW:  '->';
+BR:     [\n] -> channel(HIDDEN);
 WS:     [ \t\r]+ -> skip;

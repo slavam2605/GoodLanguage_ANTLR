@@ -11,7 +11,7 @@ import ru.ifmo.ctddev.parsing.antlr.SLangParser;
  */
 public class Main {
     public static void main(String[] args) {
-        ANTLRInputStream is = new ANTLRInputStream("x = (a + b) * (c - d * e)");
+        ANTLRInputStream is = new ANTLRInputStream("a = (3, 4); a -> (b, b): a = b ! a = 42;");
         SLangLexer lexer = new SLangLexer(is);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         SLangParser parser = new SLangParser(tokens);
